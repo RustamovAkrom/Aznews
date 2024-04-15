@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import HomePage, CategoriPage, AboutPage, LatesNewsPage, ContactPage, DetailsPage
+from .views import HomePage, CategoryPage, AboutPage, LatestNewsPage, ContactPage, DetailsPage
 
 
 app_name = "news"
 urlpatterns = [
+    path("details/<pk>", DetailsPage.as_view(), name = "details"),
     path("", HomePage.as_view(), name="home"),
-    path("categori/", CategoriPage.as_view(), name="categori"),
+    path("category/", CategoryPage.as_view(), name="category"),
     path("about/", AboutPage.as_view(), name="about"),
-    path("lates-news/", LatesNewsPage.as_view(), name='lates-news'),
+    path("latest-news/", LatestNewsPage.as_view(), name='latest-news'),
     path("contact/", ContactPage.as_view(), name="contact"),
-    path("details/",DetailsPage.as_view(), name="details"),
 ]

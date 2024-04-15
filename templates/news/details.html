@@ -31,10 +31,10 @@
                             <!-- Trending Tittle -->
                             <div class="about-right mb-90">
                                 <div class="about-img">
-                                    <img src="assets/img/trending/trending_top.jpg" alt="">
+                                    <img src="{{ detail_new.image.url }}" alt="img not found">
                                 </div>
                                 <div class="section-tittle mb-30 pt-30">
-                                    <h3>Here come the moms in space</h3>
+                                    <h3>{{ detail_new.title }}</h3>
                                 </div>
                                 <div class="about-prea">
                                     <p class="about-pera1 mb-25">Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
@@ -73,10 +73,10 @@
                                     <div class="section-tittle">
                                         <h3 class="mr-20">Share:</h3>
                                         <ul>
-                                            <li><a href="#"><img src="assets/img/news/icon-ins.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-fb.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-tw.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/img/news/icon-yo.png" alt=""></a></li>
+                                            <li><a href="#"><img src="{% static 'img/news/icon-ins.png' %}" alt="img"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/news/icon-fb.png' %}" alt="img"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/news/icon-tw.png' %}" alt="img"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/news/icon-yo.png' %}" alt="img"></a></li>
                                         </ul>
                                     </div>
                                 </div>

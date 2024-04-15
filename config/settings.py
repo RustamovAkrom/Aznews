@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.news',
     'apps.shared',
-    'apps.users'
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -124,10 +124,10 @@ USE_TZ = True
 AUTH_USER_MODEL = "users.User"
 
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
