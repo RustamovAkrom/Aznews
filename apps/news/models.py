@@ -41,18 +41,6 @@ class News(AbstractBaseModel):
     def __str__(self) -> str:
         return self.title
 
-
-class Pictures(AbstractBaseModel):
-    image = models.ImageField(upload_to="images/")
-    descriptions = models.CharField(max_length=180)
-
-    class Meta:
-        verbose_name_plural = "picture"
-        verbose_name = "pictures"
-
-    def __str__(self) -> str:
-        return self.image
-    
     
 class Contact(AbstractBaseModel):
     name = models.CharField(max_length=80)
@@ -69,18 +57,13 @@ class Contact(AbstractBaseModel):
     
 
 class Comment(AbstractBaseModel):
-    news = models.ForeignKey(News, models.CASCADE, related_name="comments")
-    user = models.ForeignKey(User, models.DO_NOTHING, related_name="comments")
+    news = models.ForeignKey(News, models.CASCADE, related_name="comment_news")
+    user = models.ForeignKey(User, models.DO_NOTHING, related_name="comment_users")
     comment = models.TextField()
-
-    reply = models.ManyToManyField(User, related_name="reply_comments", blank=True)
 
     class Meta:
         verbose_name_plural = "comment"
         verbose_name = "comments"
-
-    def reply_to(self, user):
-        self.reply.add(user)
 
     @property
     def comment_count(self):

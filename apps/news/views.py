@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
 from .models import News
+from apps.shared.models import YouTubeVideoUrl
 
 
 class HomePage(View):
@@ -9,6 +10,8 @@ class HomePage(View):
         context = {}
         news = News.objects.all()
         new = News.objects.first()
+        videos = [str(i.url).strip('https://youtu.be/') for i in YouTubeVideoUrl.objects.all()]
+
         context['tranding_top'] = new
         context['trending_buttom'] = news
         context['right_content'] = news
@@ -20,6 +23,8 @@ class HomePage(View):
         context['card_fure'] = news
         context['card_five'] = news
         context['card_six'] = news
+
+        context['youtube_videos'] = videos
         
         #follow us
         context['fans_facebook'] = 0

@@ -4,11 +4,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %} Base Extends Page {% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -16,7 +16,7 @@
             <link rel="stylesheet" href="{% static 'css/ticker-style.css' %}">
             <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
             <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
-            <link rel="stylesheet" href="{% static 'css/animate.min.css' %} ">
+            <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
             <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
             <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
             <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
@@ -98,14 +98,14 @@
                                             <li><a href="{% url 'news:about' %}">About</a></li>
                                             <li><a href="{% url 'news:latest-news' %}">Latest News</a></li>
                                             <li><a href="{% url 'news:contact' %}">Contact</a></li>
-                                            <!-- <li><a href="#">Pages</a>
+                                            <li><a href="#">Pages</a>
                                                 <ul class="submenu">
                                                     <li><a href="elements.html">Element</a></li>
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="single-blog.html">Blog Details</a></li>
                                                     <li><a href="details.html">Categori Details</a></li>
                                                 </ul>
-                                            </li> -->
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>

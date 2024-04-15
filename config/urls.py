@@ -23,7 +23,8 @@ from config import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("apps.news.urls")),
-    # path('users/', include("apps.users.urls"))
+    path('blog/', include("apps.Blog.urls")),
+    path('users/', include("apps.users.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
