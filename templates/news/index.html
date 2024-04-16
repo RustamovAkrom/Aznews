@@ -285,46 +285,7 @@
                     <h3>Follow Us</h3>
                 </div>
                 <!-- Flow Socail -->
-                <div class="single-follow mb-45">
-                    <div class="single-box">
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="{% static 'img/news/icon-fb.png' %}" alt=""></a>
-                            </div>
-                            <div class="follow-count">  
-                                <span>{{ fans_facebook }}</span>
-                                <p>Fans</p>
-                            </div>
-                        </div> 
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="{% static 'img/news/icon-tw.png' %}" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>{{ fans_tweater }}</span>
-                                <p>Fans</p>
-                            </div>
-                        </div>
-                            <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="{% static 'img/news/icon-ins.png' %}" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>{{ fans_instogram }}</span>
-                                <p>Fans</p>
-                            </div>
-                        </div>
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="{% static 'img/news/icon-yo.png' %}" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>{{ fans_youtube }}</span>
-                                <p>Fans</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include 'includes/flow_socail.html' %}
                 <!-- New Poster -->
                 <div class="news-poster d-none d-lg-block">
                     <img src="{% static 'img/news/news_card.jpg' %}" alt="">
@@ -435,42 +396,19 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="recent-active dot-style d-flex dot-style">
+                            {% for news in recent_articles %}
                             <div class="single-recent mb-100">
                                 <div class="what-img">
-                                    <img src="assets/img/news/recent1.jpg" alt="">
+                                    <img src="{{ news.image.url }}" alt="">
                                 </div>
                                 <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                    <span class="color1">{{ news.subjects }}</span>
+                                    <h4><a href="{% url 'news:details' news.pk %}">{{ news.title }}</a></h4>
                                 </div>
                             </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent3.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                                </div>
-                            </div>
+                            {% empty %}
+                                <p><h2>Now content recent articles</h2></p>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -479,25 +417,7 @@
     </div>           
     <!--Recent Articles End -->
     <!--Start pagination -->
-    <div class="pagination-area pb-45 text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="single-wrap d-flex justify-content-center">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-start">
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted"></span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
-                            </ul>
-                          </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'includes/paginations.html' %}
     <!-- End pagination  -->
     </main>
 {% endblock %}

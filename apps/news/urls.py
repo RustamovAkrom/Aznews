@@ -4,7 +4,7 @@ from .views import HomePage, CategoryPage, AboutPage, LatestNewsPage, ContactPag
 
 app_name = "news"
 urlpatterns = [
-    path("details/<pk>", DetailsPage.as_view(), name = "details"),
+    path("details/<int:pk>", DetailsPage.as_view(), name = "details"),
     path("", HomePage.as_view(), name="home"),
     path("category/", CategoryPage.as_view(), name="category"),
     path("about/", AboutPage.as_view(), name="about"),

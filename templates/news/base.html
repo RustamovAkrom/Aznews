@@ -40,6 +40,13 @@
     <!-- Preloader Start -->
 
     <header>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
