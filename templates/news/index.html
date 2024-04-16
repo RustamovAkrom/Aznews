@@ -339,10 +339,10 @@
                     <div class="video-items-active">
                         {% for video in youtube_videos %}
                         <div class="video-items text-center">
-                            <!-- https://youtu.be/XjSq-nmy_sg -->
-                            <!-- https://www.youtube.com/embed/VIDEO_ID_HERE -->
                             <iframe src="https://www.youtube.com/embed/{{ video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
                         </div>
+                        {% empty %}
+                        <p><h2>Now content youtube videos</h2></p>
                         {% endfor %}
                     </div>
                 </div>

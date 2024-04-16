@@ -7,9 +7,13 @@ from .models import News
 from .forms import DetailsContactForm
 from apps.shared.models import YouTubeVideoUrl
 from django.contrib import messages
+from config.celery import app
 
 from django.core.mail import send_mail
+from dotenv import load_dotenv
+load_dotenv()
 
+import os
 
 class HomePage(View):
     def get(self, request):
@@ -54,6 +58,11 @@ class CategoryPage(View):
         context['card_five'] = news
         context['card_six'] = news
 
+        context['fans_facebook'] = 0
+        context['fans_tweater'] = 0
+        context['fans_instogram'] = 0
+        context['fans_youtube'] = 0
+
         return render(request, "news/categori.html", context)
     
 
@@ -61,9 +70,48 @@ class AboutPage(TemplateView):
     template_name = "news/about.html"
 
 
-class LatestNewsPage(TemplateView):
-    template_name = "news/latest_news.html"
+class LatestNewsPage(View):
+    def get(self, request):
+        context = {}
+        news = News.objects.filter(is_active=True)
+        new = news.first()
+        videos = [str(i.url).strip('https://youtu.be/') for i in YouTubeVideoUrl.objects.all()]
+        form = DetailsContactForm()
 
+        context['form'] = form
+        context['tranding_top'] = new
+        #follow us
+        context['fans_facebook'] = 0
+        context['fans_tweater'] = 0
+        context['fans_instogram'] = 0
+        context['fans_youtube'] = 0
+
+        context['youtube_videos'] = videos
+        return render(request, "news/latest_news.html", context)
+
+    def post(self, request):
+        form = DetailsContactForm(request.POST)
+        if form.is_valid():
+
+            message = form.cleaned_data.get('message')
+            name = form.cleaned_data.get("name")
+            email = form.cleaned_data.get("email")
+            subject = form.cleaned_data.get("subject")
+            
+            app.task()
+            send_mail(from_email = os.getenv("EMAIL_HOST_USER"), 
+                      subject = subject, 
+                      message = message, 
+                      recipient_list = [email])
+            
+            print(message, name, email, subject)
+            messages.success(request, "You succesfully sending")
+            return redirect(reverse("news:latest-news"))
+        
+        else:
+            messages.error(request, "Your sending is are not valid!")
+            return redirect("news:latest-news")
+        
 
 class ContactPage(TemplateView):
     template_name = "news/contact.html"
@@ -89,12 +137,20 @@ class DetailsPage(View):
     def post(self, request, pk):
         form = DetailsContactForm(request.POST)
         if form.is_valid():
+
             message = form.cleaned_data.get('message')
             name = form.cleaned_data.get("name")
             email = form.cleaned_data.get("email")
             subject = form.cleaned_data.get("subject")
-            messages.success(request, "You succesfully sending")
+            
+            app.task()
+            send_mail(from_email = os.getenv("EMAIL_HOST_USER"), 
+                      subject = subject, 
+                      message = message, 
+                      recipient_list = [email])
+            
             print(message, name, email, subject)
+            messages.success(request, "You succesfully sending")
             return redirect(reverse("news:details", kwargs={"pk":pk}))
         
         else:
