@@ -113,10 +113,35 @@ class LatestNewsPage(View):
             return redirect("news:latest-news")
         
 
-class ContactPage(TemplateView):
-    template_name = "news/contact.html"
+class ContactPage(View):
+    def get(self, request):
+        context = {}
+        context['form'] = DetailsContactForm()
+        return render(request, "news/contact.html", context)
+    
+    def post(self, request):
+        form = DetailsContactForm(request.POST)
+        if form.is_valid():
+            
+            message = form.cleaned_data.get('message')
+            name = form.cleaned_data.get("name")
+            email = form.cleaned_data.get("email")
+            subject = form.cleaned_data.get("subject")
+            
+            app.task()
+            send_mail(from_email = os.getenv("EMAIL_HOST_USER"), 
+                      subject = subject, 
+                      message = f"{name} :{message}", 
+                      recipient_list = [email])
 
-
+            messages.success(request, "You succesfully sending")
+            return redirect(reverse("news:contact"))
+        
+        else:
+            messages.error(request, "Your sending is are not valid!")
+            return redirect("news:contact")
+        
+        
 class DetailsPage(View):
     def get(self, request, pk):
         context = {}
@@ -146,10 +171,9 @@ class DetailsPage(View):
             app.task()
             send_mail(from_email = os.getenv("EMAIL_HOST_USER"), 
                       subject = subject, 
-                      message = message, 
+                      message = f"{name} :{message}", 
                       recipient_list = [email])
             
-            print(message, name, email, subject)
             messages.success(request, "You succesfully sending")
             return redirect(reverse("news:details", kwargs={"pk":pk}))
         
