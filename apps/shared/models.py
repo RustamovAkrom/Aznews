@@ -11,7 +11,7 @@ class AbstractBaseModel(models.Model):
 
 class Pictures(AbstractBaseModel):
     image = models.ImageField(upload_to="images/")
-    descriptions = models.CharField(max_length=180)
+    descriptions = models.CharField(max_length=180, blank=True, null=True)
 
     class Meta:
         verbose_name = "pictures"
@@ -25,7 +25,7 @@ class Pictures(AbstractBaseModel):
 class YouTubeVideoUrl(AbstractBaseModel):
     url = models.URLField()
     title = models.CharField(max_length=80)
-    descriptions = models.CharField(max_length=300)
+    descriptions = models.CharField(max_length=300, blank=True, null=True)
 
     class Meta:
         verbose_name = "youtube_video"

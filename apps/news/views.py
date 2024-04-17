@@ -66,8 +66,17 @@ class CategoryPage(View):
         return render(request, "news/categori.html", context)
     
 
-class AboutPage(TemplateView):
-    template_name = "news/about.html"
+class AboutPage(View):
+    def get(self, request):
+        context = {}
+
+        context['fans_facebook'] = 0
+        context['fans_tweater'] = 0
+        context['fans_instogram'] = 0
+        context['fans_youtube'] = 0
+
+        return render(request, "news/about.html", context)
+    # template_name = "news/about.html"
 
 
 class LatestNewsPage(View):
