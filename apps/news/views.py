@@ -79,13 +79,26 @@ class CategoryPage(View):
     def get(self, request):
         context = {}
         news = News.objects.filter(is_active=True)
+ # . . . 
+        page = request.GET.get('page', 1)
+        size = request.GET.get('size', 4)
+        #Paginate pages
+        pagination = Paginator(news.order_by('id'), size)
+        page_obj = pagination.page(page)
+        context['page_obj'] = page_obj
 
-        context['card_one'] = news
-        context['card_two'] = news
-        context['card_three'] = news
-        context['card_fure'] = news
-        context['card_five'] = news
-        context['card_six'] = news
+        #all
+        context['card_one'] = page_obj
+        #life & style 
+        context['card_two'] = news.filter(categories=2)
+        #travel
+        context['card_three'] = news.filter(categories=1)
+        #fashion
+        context['card_fure'] = news.filter(categories=3)
+        #sports
+        context['card_five'] = news.filter(categories=4)
+        #technologiy
+        context['card_six'] = news.filter(categories=5)
 
         context['fans_facebook'] = 0
         context['fans_tweater'] = 0
@@ -105,7 +118,6 @@ class AboutPage(View):
         context['fans_youtube'] = 0
 
         return render(request, "news/about.html", context)
-    # template_name = "news/about.html"
 
 
 class LatestNewsPage(View):

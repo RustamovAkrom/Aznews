@@ -12,14 +12,14 @@
                         <article class="blog_item">
                             <div class="blog_item_img">
                                 <img class="card-img rounded-0" src="{{ post.content_image.url }}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
+                                <a href="{{ 'post.content_image.url' }}" class="blog_item_date">
+                                    <h3>{{ post.created_at.day }}</h3>
+                                    <p>{{ post.created_at.month }}</p>
                                 </a>
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
+                                <a class="d-inline-block" href="{% url 'blog:blog-detail' post.pk %}">
                                     <h2>{{ post.title }}</h2>
                                 </a>
                                 <p>{{ blog.descriptions }}</p>
@@ -32,26 +32,7 @@
                         {% empty %}
                         <p><h2>Now content posts</h2></p>
                         {% endfor %}
-                        <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        {% include 'includes/blog_paginations.html' %}
                     </div>
                 </div>
                 <div class="col-lg-4">
