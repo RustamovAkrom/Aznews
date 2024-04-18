@@ -19,6 +19,7 @@ class Post(AbstractBaseModel):
     title = models.CharField(max_length=120)
     descriptions = models.CharField(max_length=180, blank=True, null=True)
     content = models.TextField()
+    content_image = models.ImageField(upload_to="posts/content/images/")
     is_active = models.BooleanField(default=False)
 
     class Meta:
