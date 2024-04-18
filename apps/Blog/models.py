@@ -13,12 +13,25 @@ class Categories(AbstractBaseModel):
     def __str__(self) -> str:
         return self.name
     
+    
+class Tag(AbstractBaseModel):
+    name = models.CharField(max_length=60)
+
+    class Meta:
+        verbose_name = 'tag'
+        verbose_name_plural = "Tags"
+
+    def __str__(self) -> str:
+        return self.name
+    
 
 class Post(AbstractBaseModel):
     user = models.ForeignKey(User, models.CASCADE, related_name="posts")
     title = models.CharField(max_length=120)
     descriptions = models.CharField(max_length=180, blank=True, null=True)
     content = models.TextField()
+    categories = models.ForeignKey(Categories, models.CASCADE, related_name="posts")
+    tags = models.ForeignKey(Tag, models.CASCADE, related_name="posts")
     content_image = models.ImageField(upload_to="posts/content/images/")
     is_active = models.BooleanField(default=False)
 

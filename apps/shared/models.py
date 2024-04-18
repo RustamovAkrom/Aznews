@@ -34,3 +34,14 @@ class YouTubeVideoUrl(AbstractBaseModel):
     def __str__(self) -> str:
         return self.title
     
+
+class AnonimusUserEmails(AbstractBaseModel):
+    email = models.EmailField(unique=True)
+
+    class Meta:
+        verbose_name = "anonimus_user_emails"
+        verbose_name_plural = "Anonimus User Emails"
+
+    def __str__(self) -> str:
+        return self.email
+    

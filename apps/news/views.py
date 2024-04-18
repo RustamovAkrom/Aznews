@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
 
 from django.core.paginator import Paginator
@@ -13,13 +12,15 @@ from django.core.mail import send_mail
 from dotenv import load_dotenv
 load_dotenv()
 
-from .models import News, Catgoriyes
+from .models import News
 from .forms import DetailsContactForm
 from apps.shared.models import YouTubeVideoUrl
 
 import os
 
+
 class HomePage(View):
+
     def get(self, request):
         context = {}
         news = News.objects.filter(is_active=True)
@@ -76,6 +77,7 @@ class HomePage(View):
 
 
 class CategoryPage(View):
+
     def get(self, request):
         context = {}
         news = News.objects.filter(is_active=True)
@@ -109,6 +111,7 @@ class CategoryPage(View):
     
 
 class AboutPage(View):
+
     def get(self, request):
         context = {}
 
@@ -121,6 +124,7 @@ class AboutPage(View):
 
 
 class LatestNewsPage(View):
+
     def get(self, request):
         context = {}
         news = News.objects.filter(is_active=True)
@@ -140,6 +144,7 @@ class LatestNewsPage(View):
         return render(request, "news/latest_news.html", context)
 
     def post(self, request):
+
         form = DetailsContactForm(request.POST)
         if form.is_valid():
 
@@ -164,6 +169,7 @@ class LatestNewsPage(View):
         
 
 class ContactPage(View):
+
     def get(self, request):
         context = {}
         context['form'] = DetailsContactForm()
@@ -193,6 +199,7 @@ class ContactPage(View):
         
         
 class DetailsPage(View):
+
     def get(self, request, pk):
         context = {}
         detail_new = News.objects.get(pk = pk)
