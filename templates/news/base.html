@@ -110,10 +110,19 @@
                                                     <li><a href="#">Pictures</a></li>
                                                 </ul>
                                             </li>
+                                            {% if request.user.is_authenticated %}
+                                                <a href="{% url 'users:create-post' %}" class="genric-btn primary-border circle arrow">Create Post<span class="lnr lnr-arrow-right"></span></a>
+                                                <a href="{% url 'users:profile' user.pk %}" class="genric-btn primary-border circle arrow">Profile<span class="lnr lnr-arrow-right"></span></a>
+                                                <a href="{% url 'users:logout' %}" class="genric-btn primary-border circle arrow">Log Out<span class="lnr lnr-arrow-right"></span></a>
+                                            {% else %}
+                                                <a href="{% url 'users:register' %}" class="genric-btn success medium">Sign In</a>
+                                                <a href="{% url 'users:login' %}" class="genric-btn success medium">Sign Up</a>
+                                            {% endif %}
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>             
+                            </div>       
+
                             <div class="col-xl-2 col-lg-2 col-md-4">
                                 <div class="header-right-btn f-right d-none d-lg-block">
                                     <i class="fas fa-search special-tag"></i>

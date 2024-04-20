@@ -1,0 +1,94 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %} About {% endblock %}
+{% block content %}
+    <main>
+        <!-- About US Start -->
+        <div class="about-area">
+            <div class="container">
+                    <!-- Hot Aimated News Tittle-->
+                   <div class="row">
+                        <div class="whole-wrap">
+                            <div class="container box_1170">
+                                <div class="section-top-border">
+                                    <h3 class="mb-50 mt-10">{{ request.user }}</h3>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="{{ request.user.avatar.url }}" alt="" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-9 mt-sm-20">
+                                            {% if request.user.first_name %}
+                                                <p><h6>{{ request.user.first_name }}</h6></p>
+                                            {% endif %}
+                                            {% if request.user.last_name %}
+                                                <p><h6>{{ request.user.last_name }}</h6></p>
+                                            {% endif %}
+                                            {% if request.user.username %}
+                                                <p><h6>{{ request.user.username }}</h6></p>
+                                            {% endif %}
+                                            {% if request.user.website %}
+                                                <p><h6>website: </h6><span><a href="{{ requst.user.website }}">{{ request.user.website }}</a></span></p>
+                                            {% endif %}
+                                            {% if request.user.bio %}
+                                                <p><h6><small>bio: </h6><span>{{ request.user.bio }}</span></small></p>
+                                            {% endif %}
+                                            {% if request.user.address %}
+                                                <p><h6>address: {{ request.user.address }}</h6></p>
+                                            {% endif %}
+                                            {% if request.user.city %}
+                                                <p><h6>city: {{ request.user.city }}</h6></p>
+                                            {% endif %}
+                                            {% if request.user.country %}
+                                                <p><h6>country: {{ request.user.country }}</h6></p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- forms profile -->
+                                <div class="section-top-border">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8">
+                                            <h3 class="mb-30">Profile Settings</h3>
+                                            <form action="{% url 'users:profile' request.user.pk %}" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="mt-10">
+                                                    {{ form.avatar }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.first_name }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.last_name }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.username }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.website }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.email }}
+                                                </div>
+                                                <div class="input-group-icon mt-10">
+                                                    {{ form.address }}
+                                                </div>
+                                                <div class="mt-10">
+                                                    {{ form.bio }}
+                                                </div>
+                                                <!-- button -->
+                                                <div class="mt-10">
+                                                    <button type="submit" class="btn" value="update">update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                </div>
+                                <!-- end form -->
+                            </div>
+                        </div>
+                   </div>
+            </div>
+        </div>
+        <!-- About US End -->
+    </main>
+{% endblock %}
