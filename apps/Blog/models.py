@@ -42,6 +42,9 @@ class Post(AbstractBaseModel):
     def __str__(self) -> str:
         return self.title
     
+    def comment_count(self):
+        return self.comments.count()
+    
     
 class Comment(AbstractBaseModel):
     post = models.ForeignKey(Post, models.CASCADE, related_name="comments")
@@ -54,10 +57,8 @@ class Comment(AbstractBaseModel):
         verbose_name_plural = "Comments"
 
     def __str__(self) -> str:
-        if self.reply is not None:
-            return f"{self.user} -> {self.reply}"
-        else:
-            return f"{self.user} -> {self.post}"
+        return f"{self.user} -> {self.post}"
+    
 
 
 class CommentLike(AbstractBaseModel):
