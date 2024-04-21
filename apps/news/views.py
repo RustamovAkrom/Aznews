@@ -24,7 +24,7 @@ class HomePage(View):
     def get(self, request):
         context = {}
         news = News.objects.filter(is_active=True)
-        new = News.objects.first()
+        new = News.objects.order_by("-created_at")[0]
 
         videos = [str(i.url).strip('https://youtu.be/') for i in YouTubeVideoUrl.objects.all()]
 
@@ -34,6 +34,7 @@ class HomePage(View):
         #Paginate pages
         pagination = Paginator(news.order_by('id'), size)
         page_obj = pagination.page(page)
+
         context['page_obj'] = page_obj
 
         context['tranding_top'] = new
@@ -69,7 +70,7 @@ class HomePage(View):
         if param is not None:
             response_param = news.filter(title__icontains = param)
             if response_param:
-                context['tranding_top'] = response_param[0]
+                context['tranding_top'] = response_param.first()
                 context['right_content'] = response_param[1:]
                 context['trending_buttom'] = response_param[1:]
 

@@ -12,7 +12,7 @@
                         <article class="blog_item">
                             <div class="blog_item_img">
                                 <img class="card-img rounded-0" src="{{ post.content_image.url }}" alt="">
-                                <a href="#" class="blog_item_date">
+                                <a href="{% url 'blog:blog-detail' post.pk %}" class="blog_item_date">
                                     <h3>{{ post.created_at }}</h3>
                                 </a>
                             </div>
@@ -23,8 +23,8 @@
                                 </a>
                                 <p>{{ blog.descriptions }}</p>
                                 <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                    <li><a href="#"><i class="fa fa-user"></i>{{ post.categories }}</a></li>
+                                    <li><a href="{% url 'blog:blog-detail' post.pk %}"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
                                 </ul>
                             </div>
                         </article>

@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from .models import Post, Categories, Tag, Comment
 from .forms import SaveAnonimousUserEmail, WriteComment
+from apps.shared.models import Pictures
 
 
 class BlogPage(View):
@@ -139,3 +140,7 @@ class BlogDetailLeaveReaply(View):
         return redirect(reverse("blog:blog-blog"))
 
         
+class PicturesPage(View):
+    def get(self, request):
+        pictures = Pictures.objects.all()
+        return render(request, "blog/pictures.html", {"pictures": pictures})

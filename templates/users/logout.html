@@ -2,4 +2,25 @@
 {% load static %}
 {% block title %} Posts {% endblock %}
 {% block content %}
+<div class="container">
+    <div class="mt-90 mb-50">
+        <center>
+            <h2>You are log out ?</h2>
+            <div class="mt-90">
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                        <button class="genric-btn primary-border circle arrow" type="submit">
+                            Yes
+                            <span class="lnr lnr-arrow-right">
+                            </span>
+                        </button>
+                </form>
+            </div>
+            <div class="mt-10">
+                <a href="{% url 'blog:blog' %}" class="genric-btn primary-border circle arrow">Now<span class="lnr lnr-arrow-right"></span></a>
+            </div>
+        </center>
+    </div>
+</div>
+
 {% endblock %}

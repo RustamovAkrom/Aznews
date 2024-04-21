@@ -19,7 +19,7 @@ class Pictures(AbstractBaseModel):
         
 
     def __str__(self) -> str:
-        return self.image
+        return self.image.url
     
 
 class YouTubeVideoUrl(AbstractBaseModel):

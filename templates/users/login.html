@@ -1,5 +1,10 @@
 {% extends 'news/base.html' %}
 {% load static %}
-{% block title %} Posts {% endblock %}
+{% block title %} Login {% endblock %}
 {% block content %}
+<form action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="submit">
+</form>
 {% endblock %}
