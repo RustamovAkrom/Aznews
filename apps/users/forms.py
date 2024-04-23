@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 
 
 class UserProfileForm(forms.ModelForm):
+    avatar = forms.FileField(widget=forms.FileInput(attrs={
+        "type":"file", "name":"avatar", "placeholder":"Your avatar", "class":"single-input",
+        "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'Your avatar'"
+    }))
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         "type":"text", "name":"first_name", "placeholder":"First Name", "class":"single-input",
         "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'First Name'"
@@ -27,7 +31,7 @@ class UserProfileForm(forms.ModelForm):
     }))
     address = forms.CharField(widget=forms.TextInput(attrs={
         "type":"text", "name":"address", "placeholder":"Address","class":"single-input",
-        "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'Email address'"
+        "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'Address'"
     }))
     bio = forms.CharField(widget=forms.Textarea(attrs={
         "placeholder":"Bio","class":"single-input",
@@ -92,6 +96,12 @@ class UserRegisterForm(forms.ModelForm):
         
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(max_length=150)
-    password = forms.CharField(max_length=50)
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        "type":"text", "name":"username", "placeholder":"Username","class":"single-input",
+        "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'Username'", "required":None
+    }))
+    password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
+        "type":"password", "name":"password", "placeholder":"Password","class":"single-input",
+        "onfocus":"this.placeholder = ''", "onblur":"this.placeholder = 'Password'"
+    }))
     

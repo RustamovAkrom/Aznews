@@ -107,12 +107,21 @@
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
                                                     <li><a href="{% url 'blog:blog' %}">Blog</a></li>
+                                                    {% if request.user.is_authenticated %}
+                                                        <li><a href="{% url 'blog:create-post' %}">Create Post</a></li>
+                                                        <li><a href="{% url 'blog:my-posts' %}">My posts</a></li>
+                                                    {% endif %}
                                                     <li><a href="{% url 'blog:pictures' %}">Pictures</a></li>
                                                 </ul>
                                             </li>
                                             {% if request.user.is_authenticated %}
-                                                <a href="{% url 'users:create-post' %}" class="genric-btn primary-border circle arrow">Create Post<span class="lnr lnr-arrow-right"></span></a>
-                                                <a href="{% url 'users:profile' user.pk %}" class="genric-btn primary-border circle arrow">Profile<span class="lnr lnr-arrow-right"></span></a>
+                                                <a href="{% url 'users:profile' user.pk %}" class="genric-btn primary-border circle arrow">
+                                                    {% if request.user.username %}
+                                                        {{ request.user.username }}
+                                                    {% else %}
+                                                    Profile
+                                                    {% endif %}
+                                                    <span class="lnr lnr-arrow-right"></span></a>
                                                 <a href="{% url 'users:logout' %}" class="genric-btn primary-border circle arrow">Log Out<span class="lnr lnr-arrow-right"></span></a>
                                             {% else %}
                                                 <a href="{% url 'users:register' %}" class="genric-btn success medium">Sign In</a>

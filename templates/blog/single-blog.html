@@ -16,8 +16,8 @@
                         {{ post.title }}
                      </h2>
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                        <li><a href="#"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
+                        <li><a href="{% url 'blog:blog' %}?categoriy={{ post.categories }}"><i class="fa fa-user"></i> {{ post.categories }}</a></li>
+                        <li><a href="{% url 'blog:blog-detail' post.pk %}"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
                      </ul>
                      <div class="quote-wrapper">
                         <div class="quotes">

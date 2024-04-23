@@ -56,7 +56,6 @@ class UserLoginPage(View):
             return redirect("users:login")
         
 
-
 class UserLogoutPage(LoginRequiredMixin, View):
 
     def get(self, request):
@@ -65,12 +64,14 @@ class UserLogoutPage(LoginRequiredMixin, View):
 
     def post(self, request):
         logout(request)
+        messages.success(request, "You successfully Logout")
         return redirect("blog:blog")
     
 
 class UserProfilePage(LoginRequiredMixin, View):
 
     def get(self, request, pk):
+
         context = {}
         user = User.objects.get(pk = pk)
         form = UserProfileForm(instance = user)
@@ -78,9 +79,12 @@ class UserProfilePage(LoginRequiredMixin, View):
         return render(request, "users/profile.html", context)
     
     def post(self, request, pk):
+
         user = User.objects.get(pk = pk)
         form = UserProfileForm(data=request.POST, instance = user, files=request.FILES)
+
         if form.is_valid():
+
             form.save()
             messages.success(request, "your successfully updated")
             return redirect(reverse("users:profile", kwargs={"pk":user.pk}))
@@ -88,7 +92,3 @@ class UserProfilePage(LoginRequiredMixin, View):
         else:
             messages.error(request, "Ow not Bro, you profile are not valid!")
             return redirect(reverse("users:profile", kwargs={"pk":user.pk}))
-        
-
-class CreatePostPage(LoginRequiredMixin, TemplateView):
-    template_name  ="users/create_post.html"
