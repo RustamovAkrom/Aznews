@@ -16,7 +16,7 @@
                         {{ post.title }}
                      </h2>
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="{% url 'blog:blog' %}?categoriy={{ post.categories }}"><i class="fa fa-user"></i> {{ post.categories }}</a></li>
+                        <li><a href="{% url 'blog:blog' %}?user={{ post.user.id }}"><i class="fa fa-user"></i> {{ post.user }}</a></li>
                         <li><a href="{% url 'blog:blog-detail' post.pk %}"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
                      </ul>
                      <div class="quote-wrapper">
@@ -28,6 +28,12 @@
                         {{ post.content }}
                      </p>
                   </div>
+                  {% if request.user == post.user %}
+                     <div class="mt-10 mb-3">
+                           <a href="{% url 'blog:delete-post' post.pk %}" class="btn mt-10 mb-3 col-lg-4">delete</a>
+                           <a href="{% url 'blog:update-post' post.pk %}" class="btn mt-10 mb-3 col-lg-4">update</a>
+                     </div>
+                  {% endif %}
                </div>
                <div class="navigation-top">
                   <div class="d-sm-flex justify-content-between text-center">
@@ -45,7 +51,6 @@
                         <li><a href="#"><i class="fab fa-behance"></i></a></li>
                      </ul>
                   </div>
-                  
                </div>
                
                <div class="blog-author">
@@ -61,6 +66,7 @@
                      </div>
                   </div>
                </div>
+
                {% if request.user.is_authenticated %}
                   <div class="comment-form">
                      <h4>Leave a Reply</h4>

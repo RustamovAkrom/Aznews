@@ -15,14 +15,17 @@ class UserRegisterPage(TemplateView):
     def get(self, request):
         context = {}
         form = UserRegisterForm()
-        context['form'] = form
+        context["form"] = form
         return render(request, "users/register.html", context)
 
     def post(self, request):
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, "Good you successfully registred, plreace enter username and password.")
+            messages.success(
+                request,
+                "Good you successfully registred, plreace enter username and password.",
+            )
             return redirect("users:login")
         else:
             messages.error(request, "Ow no Bro. Your authentification are not valid !")
@@ -34,15 +37,15 @@ class UserLoginPage(View):
     def get(self, request):
         context = {}
         form = UserLoginForm()
-        context['form'] = form
+        context["form"] = form
         return render(request, "users/login.html", context)
-    
+
     def post(self, request):
         form = UserLoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
             if user is not None:
                 login(request, user)
@@ -52,9 +55,11 @@ class UserLoginPage(View):
                 messages.error(request, "Invalid username or password")
                 return redirect("users:login")
         else:
-            messages.warning(request, "Ow not Bro. Your username or password are not valid !")
+            messages.warning(
+                request, "Ow not Bro. Your username or password are not valid !"
+            )
             return redirect("users:login")
-        
+
 
 class UserLogoutPage(LoginRequiredMixin, View):
 
@@ -66,29 +71,29 @@ class UserLogoutPage(LoginRequiredMixin, View):
         logout(request)
         messages.success(request, "You successfully Logout")
         return redirect("blog:blog")
-    
+
 
 class UserProfilePage(LoginRequiredMixin, View):
 
     def get(self, request, pk):
 
         context = {}
-        user = User.objects.get(pk = pk)
-        form = UserProfileForm(instance = user)
-        context['form'] = form
+        user = User.objects.get(pk=pk)
+        form = UserProfileForm(instance=user)
+        context["form"] = form
         return render(request, "users/profile.html", context)
-    
+
     def post(self, request, pk):
 
-        user = User.objects.get(pk = pk)
-        form = UserProfileForm(data=request.POST, instance = user, files=request.FILES)
+        user = User.objects.get(pk=pk)
+        form = UserProfileForm(data=request.POST, instance=user, files=request.FILES)
 
         if form.is_valid():
 
             form.save()
-            messages.success(request, "your successfully updated")
-            return redirect(reverse("users:profile", kwargs={"pk":user.pk}))
-        
+            messages.success(request, "your successfully updated profile")
+            return redirect(reverse("users:profile", kwargs={"pk": user.pk}))
+
         else:
             messages.error(request, "Ow not Bro, you profile are not valid!")
-            return redirect(reverse("users:profile", kwargs={"pk":user.pk}))
+            return redirect(reverse("users:profile", kwargs={"pk": user.pk}))

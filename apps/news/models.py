@@ -7,8 +7,8 @@ class Catgoriyes(AbstractBaseModel):
     name = models.CharField(max_length=60)
 
     class Meta:
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = "category"
+        verbose_name_plural = "categories"
 
     def __str__(self) -> str:
         return self.name
@@ -20,17 +20,19 @@ class Subjects(AbstractBaseModel):
     class Meta:
         verbose_name = "subject"
         verbose_name_plural = "subjects"
-    
+
     def __str__(self) -> str:
         return self.name
-    
+
 
 class News(AbstractBaseModel):
     image = models.ImageField(upload_to="news/images/")
     title = models.CharField(max_length=120)
     descriptions = models.TextField(blank=True, null=True)
     content = models.TextField()
-    categories = models.ForeignKey(Catgoriyes, on_delete=models.CASCADE, related_name="news")
+    categories = models.ForeignKey(
+        Catgoriyes, on_delete=models.CASCADE, related_name="news"
+    )
     subjects = models.ForeignKey(Subjects, models.CASCADE, related_name="news")
     is_active = models.BooleanField(default=False)
 
@@ -41,7 +43,7 @@ class News(AbstractBaseModel):
     def __str__(self) -> str:
         return self.title
 
-    
+
 class Contact(AbstractBaseModel):
     name = models.CharField(max_length=80)
     email = models.EmailField()
@@ -54,7 +56,7 @@ class Contact(AbstractBaseModel):
 
     def __str__(self) -> str:
         return self.name
-    
+
 
 class Comment(AbstractBaseModel):
     news = models.ForeignKey(News, models.CASCADE, related_name="comment_news")
@@ -74,4 +76,3 @@ class Comment(AbstractBaseModel):
             return f"{self.user} -> {self.reply}"
         else:
             return f"{self.user} -> {self.news}"
-    

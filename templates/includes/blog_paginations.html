@@ -1,3 +1,4 @@
+{% if page_obj %}
 <nav class="blog-pagination justify-content-center d-flex">
     <ul class="pagination">
         {% if page_obj.has_previous %}
@@ -26,3 +27,4 @@
 
     </ul>
 </nav> 
+{% endif %}

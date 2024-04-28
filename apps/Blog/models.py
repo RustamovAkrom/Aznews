@@ -12,18 +12,18 @@ class Categories(AbstractBaseModel):
 
     def __str__(self) -> str:
         return self.name
-    
-    
+
+
 class Tag(AbstractBaseModel):
     name = models.CharField(max_length=60)
 
     class Meta:
-        verbose_name = 'tag'
+        verbose_name = "tag"
         verbose_name_plural = "Tags"
 
     def __str__(self) -> str:
         return self.name
-    
+
 
 class Post(AbstractBaseModel):
     user = models.ForeignKey(User, models.CASCADE, related_name="posts")
@@ -41,11 +41,11 @@ class Post(AbstractBaseModel):
 
     def __str__(self) -> str:
         return self.title
-    
+
     def comment_count(self):
         return self.comments.count()
-    
-    
+
+
 class Comment(AbstractBaseModel):
     post = models.ForeignKey(Post, models.CASCADE, related_name="comments")
     user = models.ForeignKey(User, models.CASCADE, related_name="comments")
@@ -58,11 +58,12 @@ class Comment(AbstractBaseModel):
 
     def __str__(self) -> str:
         return f"{self.user} -> {self.post}"
-    
 
 
 class CommentLike(AbstractBaseModel):
-    comment = models.ForeignKey(Comment, models.DO_NOTHING, related_name="comment_likes")
+    comment = models.ForeignKey(
+        Comment, models.DO_NOTHING, related_name="comment_likes"
+    )
     user = models.ForeignKey(User, models.CASCADE, related_name="comment_likes")
 
     class Meta:
@@ -71,10 +72,10 @@ class CommentLike(AbstractBaseModel):
 
     def like_count(self):
         return self.user.objects.count()
-    
+
     def __str__(self) -> str:
         return f"{self.user} - like comment -> {self.comment}"
-    
+
 
 class PostLike(AbstractBaseModel):
     post = models.ForeignKey(Post, models.DO_NOTHING, related_name="post_likes")
@@ -90,4 +91,3 @@ class PostLike(AbstractBaseModel):
 
     def __str__(self) -> str:
         return f"{self.user} - like post -> {self.post}"
-    

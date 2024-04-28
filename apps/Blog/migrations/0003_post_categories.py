@@ -7,14 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Blog', '0002_post_content_image'),
+        ("Blog", "0002_post_content_image"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='categories',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='posts', to='Blog.categories'),
+            model_name="post",
+            name="categories",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="posts",
+                to="Blog.categories",
+            ),
             preserve_default=False,
         ),
     ]

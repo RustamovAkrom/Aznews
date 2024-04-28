@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shared', '0001_initial'),
+        ("shared", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pictures',
-            name='descriptions',
+            model_name="pictures",
+            name="descriptions",
             field=models.CharField(blank=True, max_length=180, null=True),
         ),
         migrations.AlterField(
-            model_name='youtubevideourl',
-            name='descriptions',
+            model_name="youtubevideourl",
+            name="descriptions",
             field=models.CharField(blank=True, max_length=300, null=True),
         ),
     ]

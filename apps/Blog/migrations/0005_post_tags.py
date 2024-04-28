@@ -7,14 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Blog', '0004_tag'),
+        ("Blog", "0004_tag"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='tags',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='posts', to='Blog.tag'),
+            model_name="post",
+            name="tags",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="posts",
+                to="Blog.tag",
+            ),
             preserve_default=False,
         ),
     ]

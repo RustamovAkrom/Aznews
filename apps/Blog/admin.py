@@ -4,7 +4,8 @@ from .models import Post, Comment, PostLike, CommentLike, Categories, Tag
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_active']
+    list_display = ["title", "is_active"]
+
 
 admin.site.register(Tag)
 admin.site.register(Comment)

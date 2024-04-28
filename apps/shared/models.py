@@ -7,7 +7,7 @@ class AbstractBaseModel(models.Model):
 
     class Meta:
         abstract = True
-        
+
 
 class Pictures(AbstractBaseModel):
     image = models.ImageField(upload_to="images/")
@@ -16,11 +16,10 @@ class Pictures(AbstractBaseModel):
     class Meta:
         verbose_name = "pictures"
         verbose_name_plural = "Pictures"
-        
 
     def __str__(self) -> str:
         return self.image.url
-    
+
 
 class YouTubeVideoUrl(AbstractBaseModel):
     url = models.URLField()
@@ -33,7 +32,7 @@ class YouTubeVideoUrl(AbstractBaseModel):
 
     def __str__(self) -> str:
         return self.title
-    
+
 
 class AnonimusUserEmails(AbstractBaseModel):
     email = models.EmailField(unique=True)
@@ -44,4 +43,3 @@ class AnonimusUserEmails(AbstractBaseModel):
 
     def __str__(self) -> str:
         return self.email
-    

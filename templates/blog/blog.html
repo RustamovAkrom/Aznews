@@ -23,7 +23,7 @@
                                 </a>
                                 <p>{{ blog.descriptions }}</p>
                                 <ul class="blog-info-link">
-                                    <li><a href="{% url 'blog:blog' %}?categoriy={{ post.categories }}"><i class="fa fa-user"></i>{{ post.categories }}</a></li>
+                                    <li><a href="{% url 'blog:blog' %}?user={{ post.user.id }}"><i class="fa fa-user"></i>{{ post.user }}</a></li>
                                     <li><a href="{% url 'blog:blog-detail' post.pk %}"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
                                 </ul>
                             </div>

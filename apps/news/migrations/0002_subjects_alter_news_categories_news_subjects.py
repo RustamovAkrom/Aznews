@@ -7,32 +7,49 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0001_initial'),
+        ("news", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Subjects',
+            name="Subjects",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=40)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=40)),
             ],
             options={
-                'verbose_name': 'subject',
-                'verbose_name_plural': 'subjects',
+                "verbose_name": "subject",
+                "verbose_name_plural": "subjects",
             },
         ),
         migrations.AlterField(
-            model_name='news',
-            name='categories',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='news', to='news.catgoriyes'),
+            model_name="news",
+            name="categories",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="news",
+                to="news.catgoriyes",
+            ),
         ),
         migrations.AddField(
-            model_name='news',
-            name='subjects',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='news', to='news.subjects'),
+            model_name="news",
+            name="subjects",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="news",
+                to="news.subjects",
+            ),
             preserve_default=False,
         ),
     ]
