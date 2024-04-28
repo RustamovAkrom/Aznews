@@ -1,0 +1,45 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %} My Posts {% endblock %}
+{% block content %}
+<section class="blog_area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="mt-10 mb-30"><h1>My Posts</h1></div>
+                <div class="blog_left_sidebar">
+                    {% for post in posts %}
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" src="{{ post.content_image.url }}" alt="">
+                            <a href="{% url 'blog:blog-detail' post.pk %}" class="blog_item_date">
+                                <h3>{{ post.created_at }}</h3>
+                            </a>
+                        </div>
+
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{% url 'blog:blog-detail' post.pk %}">
+                                <h2>{{ post.title }}</h2>
+                            </a>
+                            <p>{{ blog.descriptions }}</p>
+                            <ul class="blog-info-link">
+                                <li><a href="{% url 'blog:blog' %}?categoriy={{ post.categories }}"><i class="fa fa-user"></i>{{ post.categories }}</a></li>
+                                <li><a href="{% url 'blog:blog-detail' post.pk %}"><i class="fa fa-comments"></i> {{ post.comment_count }} Comments</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <p><h2>Now content posts</h2></p>
+                    {% endfor %}
+                    {% include 'includes/blog_paginations.html' %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    {% include 'includes/blog/blog_right_sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
