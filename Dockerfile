@@ -1,13 +1,14 @@
 FROM python:3.10.9
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /.
+WORKDIR /Aznews
 
-WORKDIR /.
+COPY . .
 
-COPY requirements.txt /./
+RUN pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
+EXPOSE 8000
 
-ADD . /./
+CMD [ "python", "manage.py", "runserver" ]

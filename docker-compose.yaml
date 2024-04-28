@@ -1,8 +1,10 @@
-version: '3'
+# version: '3'
 
-services:
-  web:
-    build: ./.
-    command: python manage.py runserver
-    volumes:
-      - .:/.
+# services:
+#   web:
+#     build: .
+#     command: python manage.py runserver 
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8000:8000"

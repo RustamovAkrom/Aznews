@@ -17,40 +17,6 @@
                                         <img src="{{ request.user.avatar.url }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="col-md-9 mt-sm-20">
-                                        <table>
-                                            <tr>
-                                                {% if request.user.first_name %}
-                                                    <p><h6>{{ request.user.first_name }}</h6></p>
-                                                {% endif %}
-                                            </tr>
-                                            <tr>
-                                                {% if request.user.last_name %}
-                                                    <p><h6>{{ request.user.last_name }}</h6></p>
-                                                {% endif %}
-                                            </tr>
-                                            <tr>
-                                                {% if request.user.username %}
-                                                    <p><h6>{{ request.user.username }}</h6></p>
-                                                {% endif %}
-                                                
-                                            </tr>
-                                        </table>
-                                        
-                                        {% if request.user.website %}
-                                            <p><h6>website: </h6><span><a href="{{ requst.user.website }}">{{ request.user.website }}</a></span></p>
-                                        {% endif %}
-                                        {% if request.user.bio %}
-                                            <p><h6><small>bio: </h6><span>{{ request.user.bio }}</span></small></p>
-                                        {% endif %}
-                                        {% if request.user.address %}
-                                            <p><h6>address: {{ request.user.address }}</h6></p>
-                                        {% endif %}
-                                        {% if request.user.city %}
-                                            <p><h6>city: {{ request.user.city }}</h6></p>
-                                        {% endif %}
-                                        {% if request.user.country %}
-                                            <p><h6>country: {{ request.user.country }}</h6></p>
-                                        {% endif %}
                                         <hr>
                                          <!-- forms profile -->
                                         <div class="section-top-border">

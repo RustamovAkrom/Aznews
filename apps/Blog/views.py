@@ -22,6 +22,8 @@ class BlogPage(View):
             posts = Post.objects.exclude(user = request.user).filter(is_active=True)
         else:
             posts = Post.objects.filter(is_active=True)
+        
+        posts = posts.order_by('-created_at')
 
         categories = Categories.objects.all()
         tags = Tag.objects.all()
@@ -99,7 +101,7 @@ class BlogDetailPage(View):
         context['post'] = post
         context['comment_form'] = comment_form
 
-        context['recent_posts'] = posts
+        context['recent_posts'] = posts.exclude(id = post.id).order_by('-created_at')
         context['categories'] = categories
         context['tags'] = tags
         context['form'] = form
@@ -192,6 +194,8 @@ class UserPostsPage(LoginRequiredMixin, View):
     
     def get(self, request):
         context = {}
+        posts = Post.objects.filter(user = request.user)
+        context['posts'] = posts
         return render(request, "blog/my_posts.html", context)
 
 
