@@ -1,0 +1,26 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %} Delete Post {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="mt-90 mb-50">
+        <center>
+            <h2>Your are deleted Post "{{ post.title }}" ?</h2>
+            <div class="mt-90">
+                <form action="{% url 'blog:delete-post' post.pk %}" method="post">
+                    {% csrf_token %}
+                        <button class="genric-btn primary-border circle arrow" type="submit">
+                            Yes
+                            <span class="lnr lnr-arrow-right">
+                            </span>
+                        </button>
+                </form>
+            </div>
+            <div class="mt-10">
+                <a href="{% url 'blog:my-posts' %}" class="genric-btn primary-border circle arrow">Now<span class="lnr lnr-arrow-right"></span></a>
+            </div>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

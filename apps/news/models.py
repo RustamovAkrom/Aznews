@@ -18,7 +18,7 @@ class Subjects(AbstractBaseModel):
     name = models.CharField(max_length=40)
 
     class Meta:
-        verbose_name = "subject"
+        verbose_name = "subject" 
         verbose_name_plural = "subjects"
 
     def __str__(self) -> str:
