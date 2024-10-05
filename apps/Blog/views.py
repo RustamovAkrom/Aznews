@@ -18,6 +18,7 @@ from .forms import (
 
 from apps.shared.models import Pictures
 
+import markdown2
 
 class BlogPage(View):
 
@@ -116,6 +117,8 @@ class BlogDetailPage(View):
         comment_form = WriteCommentForm()
 
         context["post"] = post
+        context['content_html'] = markdown2.markdown(post.content)
+        
         context["comment_form"] = comment_form
 
         if request.user.is_authenticated:

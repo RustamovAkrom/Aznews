@@ -26,6 +26,7 @@
                      </div>
                      <p class="excert">
                         {{ post.content }}
+                        <h1>{{ content_html|safe }}</h1>
                      </p>
                   </div>
                   {% if request.user == post.user %}
